@@ -1,0 +1,22 @@
+body {
+    font-family: sans-serif;
+    background: #253b51;
+    color:white;
+}
+/* menu */
+navbar-nav{
+    background-color: lightblue;
+    color:white;
+}
+
+.invalid-feedback, .form-text{
+    color:lightcoral;
+}
+
+.price, h1{
+    color:black;
+}
+
+.logo{
+    text-align: center;
+}
