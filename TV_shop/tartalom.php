@@ -7,6 +7,12 @@ switch ($menu) {
     case 'about_us':
         require_once './pages/about_us.php';
         break;
+    case 'buy':
+        require_once './pages/buy.php';
+        break;
+    case 'cart':
+        require_once './pages/cart.php';
+        break;
     case 'login':
         require_once './pages/login.php';
         break;

@@ -11,10 +11,13 @@
                 <?php
                 if ($_SESSION['login']) {
                     echo '<li class="nav-item">
+                            <a class = "nav-link' . ($menu == 'logout' ? ' active' : '') . '" href = "index.php?menu=logout">Kilépés</a>
+                        </li>
+                        <li class = "nav-item">
                         <a class="nav-link' . ($menu == 'buy' ? ' active' : '') . '" aria-current="page" href="index.php?menu=buy">Vásárlás</a>
                       </li>
                         <li class = "nav-item">
-                            <a class = "nav-link' . ($menu == 'logout' ? ' active' : '') . '" href = "index.php?menu=logout">Kilépés</a>
+                            <a class = "nav-link' . ($menu == 'cart' ? ' active' : '') . '" href = "index.php?menu=cart">Kosár</a>
                         </li>
                         <li class = "nav-item">
                             <a class = "nav-link' . ($menu == 'new_products' ? ' active' : '') . '" href = "index.php?menu=new_products">Termék hozzáadás</a>

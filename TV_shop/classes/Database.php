@@ -58,13 +58,18 @@ class Database {
     }
 
     public function getKivalasztottTV($id) {
-        $result = $this->db->query("SELECT * FROM `termekek` WHERE `termekid` = ''" . $id);
+        $result = $this->db->query("SELECT * FROM `termekek` WHERE `termekid` = " . $id);
         return $result->fetch_assoc();
     }
 
-    public function setKivalasztottTV($termekid, $termek_nev, $felbontas, $kepatlo, $termek_ar) {
-        $stmt = $this->db->prepare("UPDATE `termekek` SET `termek_nev`= ?,`felbontas`= ?,`kepatlo`= ?,`termek_ar`= ? WHERE termekid= ?");
-        $stmt->bind_param('issss', $termekid, $termek_nev, $felbontas, $kepatlo, $termek_ar);
-        return $stmt->execute();
+    public function setKivalasztottTV($termek_nev, $felbontas, $kepatlo, $termek_ar) {
+        $stmt = $this->db->prepare("Insert `termekek`(`termek_nev`,`felbontas`,`kepatlo`,`termek_ar`) Values (?, ?, ?, ? )");
+        $stmt->bind_param('ssss', $termek_nev, $felbontas, $kepatlo, $termek_ar);
+        $request = $stmt->execute();
+        if($request){
+            return true;
+        } else {
+            return false;
+        } 
     }
 }

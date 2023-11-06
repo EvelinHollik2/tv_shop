@@ -1,7 +1,6 @@
 <?php
-if (filter_input(INPUT_POST, "Válaszztás", FILTER_VALIDATE_BOOL, FILTER_NULL_ON_FAILURE)) {
+if (filter_input(INPUT_POST, "insert", FILTER_VALIDATE_BOOL, FILTER_NULL_ON_FAILURE)) {
     $adatok = $_POST;
-    var_dump($adatok);
     $termekid = filter_input(INPUT_POST, "termekid", FILTER_SANITIZE_NUMBER_INT);
     $termek_nev = htmlspecialchars(filter_input(INPUT_POST, "termek_nev"));
     $felbontas = filter_input(INPUT_POST, "felbontas");
@@ -18,6 +17,9 @@ if (filter_input(INPUT_POST, "Válaszztás", FILTER_VALIDATE_BOOL, FILTER_NULL_O
             case 'image/jpeg':
                 $kiterjesztes = ".jpg";
                 break;
+            case 'image/webp':
+                $kiterjesztes = ".webp";
+                break;
             default:
                 break;
         }
@@ -30,17 +32,22 @@ if (filter_input(INPUT_POST, "Válaszztás", FILTER_VALIDATE_BOOL, FILTER_NULL_O
             echo '<p>A kép feltöltés sikertelen!</p>';
         }
     }
-    if ($db->setKivalasztottTV($termekid, $termek_nev, $felbontas, $kepatlo, $termek_ar)) {
+    if ($db->setKivalasztottTV($termek_nev, $felbontas, $kepatlo, $termek_ar)) {
         echo '<p>Az adatok módosítása sikeres</p>';
-        header("Location: index.php?menu=products");
+        //header("Location: index.php?menu=products");
     } else {
         echo '<p>Az adatok módosítása sikertelen!</p>';
     }
 } else {
-    $adatok = $db->getKivalasztottTV($id);
+    //$adatok = $db->getKivalasztottTV(1);
+    $adatok["termekid"]="";
+    $adatok["termek_nev"]="";
+    $adatok["felbontas"]="";
+    $adatok["kepatlo"]="";
+    $adatok["termek_ar"]="";
 }
 ?>
-<form method="post" action="index.php?menu=products&id=<?php echo $adatok['termekid']; ?>" enctype="multipart/form-data">
+<form method="post" action="index.php?menu=new_products" enctype="multipart/form-data">
     <input type="hidden" name="termekid" value="<?php echo $adatok['termekid']; ?>">
     <div class="mb-3">
         <label for="termek_nev" class="form-label">Termék neve</label>
@@ -52,13 +59,13 @@ if (filter_input(INPUT_POST, "Válaszztás", FILTER_VALIDATE_BOOL, FILTER_NULL_O
             <input type="text" class="form-control" name="felbontas" id="felbontas" value="<?php echo $adatok['felbontas']; ?>">
         </div>
         <div class="mb-3 col-6">
-            <label for="kepatlo" class="form-label">Lépátló</label>
+            <label for="kepatlo" class="form-label">Képátló</label>
             <input type="text" class="form-control" name="kepatlo" id="kepatlo" value="<?php echo $adatok['kepatlo']; ?>">
         </div>
     </div>
     <div class="mb-3">
         <label for="termek_ar" class="form-label">Termék ár</label>
-        <input type="text" class="form-control" name="termek_ar" id="termek_ar" value="<?php echo $adatok['termek_ar']; ?>">
+        <input type="text" class="form-control" name="termek_ar" id="termek_ar" value="<?php echo $adatok['termek_ar']; ?> ">
     </div>
     
     <div class="row">
@@ -67,6 +74,6 @@ if (filter_input(INPUT_POST, "Válaszztás", FILTER_VALIDATE_BOOL, FILTER_NULL_O
             <input type="file" class="form-control" name="kepfajl" id="kepfajl" value="">
         </div>
     </div>
-    <button type="submit" class="btn btn-success" value="1" name="Adatmodositas">Módosítás</button>
+    <button type="submit" class="btn btn-success" value="true" name="insert">Rögzítés</button>
 </form>
 

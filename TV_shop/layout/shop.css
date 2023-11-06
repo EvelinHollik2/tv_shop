@@ -13,10 +13,14 @@ navbar-nav{
     color:lightcoral;
 }
 
-.price, h1{
+.price, p, .card{
     color:black;
 }
 
 .logo{
     text-align: center;
+}
+
+center{
+    margin: 25px;
 }

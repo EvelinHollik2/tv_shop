@@ -20,7 +20,7 @@
                 '<p class="card-text">Felbontás: ' . $row['felbontas'] . '</p>' .
                 '<p class="card-text">Lépátló: ' . $row['kepatlo'] . '</p>' .
                 '<p class="card-text">Termék ár: ' . $row['termek_ar'] . ' Ft</p>' .
-                '<a href="index.php?menu=login&id=' . $row['termekid'] . '" class="btn btn-primary" disabled="disabled">Kiválaszt</a>                
+                '<a href="index.php?menu=cart&id=' . $row['termekid'] . '" class="btn btn-primary" disabled="disabled">Kiválaszt</a>                
                     </div>
                 </div>
             ';
